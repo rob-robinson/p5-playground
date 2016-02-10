@@ -15,7 +15,12 @@
 
   <script>
 
-  // var x;
+  var app = {
+    canvas : {
+      w : 600,
+      h : 400
+    }
+  };
 
   var singleBox = {
     x:5,
@@ -24,45 +29,41 @@
     h:100
   };
 
-  var rand_incrementor = Math.floor(Math.random() * (5 - 2 + 1)) + 2;
-  var rand_incrementor2 = Math.floor(Math.random() * (5 - 2 + 1)) + 2;
+  var min = 2;
+  var max = 5;
+
+  var rand_incrementor = Math.floor(Math.random() * (max - min + 1)) + min;
+  var rand_incrementor2 = Math.floor(Math.random() * (max - min + 1)) + min;
 
   function setup() {
-    var myCanvas = createCanvas(600, 400);
+    var myCanvas = createCanvas(app.canvas.w, app.canvas.h);
     myCanvas.parent('myContainer');
-
-    //x = 50;
   }
 
   function draw() {
-   background(600,400);
-
+    background(app.canvas.w, app.canvas.h);
 
     fill(200,200,100);
 
+    rect(singleBox.x,singleBox.y,singleBox.w,singleBox.h)
 
-//    rect(random(0,600),random(0,400),random(10,25),random(10,25))
-
-
-   rect(singleBox.x,singleBox.y,singleBox.w,singleBox.h)
-   
-
+    // now modify the control variables...:
     singleBox.x += rand_incrementor2;
     singleBox.y += rand_incrementor;
 
-    if(singleBox.x > 600){
+    if(singleBox.x > app.canvas.w){
       singleBox.x = 0;
       rand_incrementor*=-1;
     } else if(singleBox.x < 0){
-      singleBox.x = 600;
+      singleBox.x = app.canvas.w;
       rand_incrementor2*=-1;
     }
-    if(singleBox.y > 400){
+    if(singleBox.y > app.canvas.h){
       singleBox.y = 0;
       rand_incrementor*=-1;
     } else if(singleBox.y < 0){
-      singleBox.y = 400;
-      rand_incrementor2*=-1;;
+      singleBox.y = app.canvas.h;
+      rand_incrementor2*=-1;
     }
 
   }
