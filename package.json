@@ -4,7 +4,8 @@
   "description": "A place to tinker with the p5.js library",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run":"python -m SimpleHTTPServer 8000"
   },
   "repository": {
     "type": "git",

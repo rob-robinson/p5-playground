@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rob's P5 Testing Playground...</title>
+</head>
+<body>
+
+  <div id='myContainer'></div>
+
+  <script src="../js/p5/p5.min.js"></script>    
+
+  <script>
+
+  var app = {
+    canvas : {
+      w : 600,
+      h : 400
+    }
+  };
+
+  var singleBox = {
+    x:5,
+    y:5,
+    w:100,
+    h:100
+  };
+
+  var min = 2;
+  var max = 5;
+
+  var rand_incrementor = Math.floor(Math.random() * (max - min + 1)) + min;
+  var rand_incrementor2 = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  function setup() {
+    var myCanvas = createCanvas(app.canvas.w, app.canvas.h);
+    myCanvas.parent('myContainer');
+  }
+
+  function draw() {
+    background(app.canvas.w, app.canvas.h);
+
+    fill(200,200,100);
+
+    rect(singleBox.x,singleBox.y,singleBox.w,singleBox.h)
+
+    // now modify the control variables...:
+    singleBox.x += rand_incrementor2;
+    singleBox.y += rand_incrementor;
+
+    if(singleBox.x > app.canvas.w){
+      singleBox.x = 0;
+      rand_incrementor*=-1;
+    } else if(singleBox.x < 0){
+      singleBox.x = app.canvas.w;
+      rand_incrementor2*=-1;
+    }
+    if(singleBox.y > app.canvas.h){
+      singleBox.y = 0;
+      rand_incrementor*=-1;
+    } else if(singleBox.y < 0){
+      singleBox.y = app.canvas.h;
+      rand_incrementor2*=-1;
+    }
+
+  }
+
+
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rob's P5 Testing Playground...</title>
+</head>
+<body>
+
+  <div id='myContainer'></div>
+
+  <script src="../js/p5/p5.min.js"></script>    
+
+  <script>
+
+  var app = {
+    canvas : {
+      w : 600,
+      h : 600
+    }
+  };
+
+  var singleBox = {
+    x:5,
+    y:5,
+    w:100,
+    h:100
+  };
+
+  function setup() {
+    var myCanvas = createCanvas(app.canvas.w, app.canvas.h);
+    myCanvas.parent('myContainer');
+  }
+
+  function drawCircle(x,y,d){
+    
+    ellipse(x,y,d,d);
+    if(d > 2) {
+      drawCircle(x+d/2,y,d/2);
+      drawCircle(x-d/2,y,d/2);
+      drawCircle(x,y+d/2,d/2);
+    }
+  }
+
+  function draw() {
+    drawCircle(app.canvas.w/2,app.canvas.h/2,300);
+  }
+
+
+  </script>
+
+  </body>
+</html>
