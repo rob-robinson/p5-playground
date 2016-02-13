@@ -11,6 +11,13 @@
 
   <script>
 
+  var index = 0;
+  var coordinates = [
+
+  {x:10,y:10},{x:12,y:10},{x:14,y:10},{x:16,y:10},{x:18,y:10},{x:20,y:10}
+
+  ];
+
   var app = {
     canvas : {
       w : 600,
@@ -30,21 +37,19 @@
     myCanvas.parent('myContainer');
   }
 
-  function drawCircle(x,y,d){
-    
-    ellipse(x,y,d,d);
-
-    if(d > 10) {
-      drawCircle(x+d/2,y,d/2);
-      drawCircle(x-d/2,y,d/2);
-      drawCircle(x,y+d/2,d/2);
-
-      //drawCircle(x,y-d/2,d/2);
-    }
-  }
 
   function draw() {
-    drawCircle(app.canvas.w/2,app.canvas.h/2,300);
+    background(app.canvas.w, app.canvas.h);
+    ellipse(coordinates[index].x,coordinates[index].y,10,10);
+    
+    if(index >= coordinates.length-1){
+      index = 0;
+      console.log("0");
+    } else {
+      index += 1;
+      console.log(index);
+    }
+    
   }
 
 
