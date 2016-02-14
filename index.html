@@ -31,9 +31,9 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li><a href="#" onclick="changePage('test_01/index.html');">Test 01</a></li>
+                  <li><a href="#" onclick="changePage('test_02/index.html');">Test 02</a></li>
+                  <li><a href="#"onclick="changePage('test_03/index.html');">Test 03</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">Nav header</li>
                   <li><a href="#">Separated link</a></li>
@@ -51,9 +51,20 @@
     <div class="container">
       <ul>
         
-        <li><a href="./test_01/">Test One</a></li>
-        <li><a href="./test_02/">Test Two</a></li>
-        <li><a href="./test_03/">Test Three</a></li>
+        <li><a href="#" onclick="changePage('test_01/index.html');">Test One</a></li>
+        <li><a href="#" onclick="changePage('test_02/index.html');">Test Two</a></li>
+        <li><a href="#" onclick="changePage('test_03/index.html');">Test Three</a></li>
+        <li><a href="#" onclick="changePage('test_04/index.html');">Test Four</a></li>
+
+      <iframe width="640" height="600" id="vid_frame" src="test_01/index.html" frameborder="0" allowfullscreen></iframe>
+
+          <script>
+    
+        function changePage(url){
+            document.getElementById('vid_frame').src = url;
+        }
+    
+          </script>
 
       </ul>
     </div>
