@@ -52,7 +52,7 @@ function draw() {
   pct += step;
   if (pct < 1.0) {
     x = beginX + (pct * distX);
-    y = beginY + (pow(pct, exponent) * distY);
+    y = beginY + (pct * distY);
   }
   fill(255);
   ellipse(x, y, 20, 20);
