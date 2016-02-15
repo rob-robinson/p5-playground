@@ -11,6 +11,10 @@
 
   <script>
 
+  /*
+    The foundation for this page comes from this page: http://students.learningtech.org/~pfarrell/p5_mandelbrot_logo2.html
+  */
+
   var iterations = 20;
 
   var app = {
@@ -18,11 +22,12 @@
       width:800,
       height:800
     },
-    scale : 10
+    scale : 4
   };
   
   var xlow = -2.5;
   var dx = 0.005;
+
   var ylow = -2.0;
   var dy = 0.005;
   
@@ -31,7 +36,9 @@
       app.canvas.width,
       app.canvas.height
     );
+    textSize(12);
   }
+
   function draw(){
 
     for(i=0;i<app.canvas.width;i+=app.scale){
@@ -44,29 +51,30 @@
 
         //now run the mandelbrot function
         var z = [0,0];
-        for(k=0;k<iterations;k++){
+
+        for( k = 0; k < iterations; k++ ) {
+          
           var z2 = squareZ(z);//square z
           z2[0] += loc[0];
           z2[1] += loc[1];
           z = z2;//update z to new value
-          }
-          //if it converges:
-          if (sqrt(z2[0]*z2[0] + z2[1]*z2[1]) < 2){
-            drawSingleDot(i,j,10);
-          }
-          
-          
+        }
+        //if it converges:
+        if (sqrt(z2[0]*z2[0] + z2[1]*z2[1]) < 2){
+          drawSingleDot(i,j,12);
         }
       }
-      noLoop();
+    }
+
+    noLoop();
   }
 
   function squareZ(z){
     return [z[0]*z[0]-z[1]*z[1],2*z[0]*z[1]];
   }
 
-  function drawSingleDot(x,y, size){
-    //fill((20*x)%255,(20*y)%255,20);
+  function drawSingleDot(x, y, size) {
+
     fill(20,20,20);
     noStroke();
     push();
