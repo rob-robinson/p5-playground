@@ -31,9 +31,15 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#" onclick="changePage('test_01/index.html');">Test 01</a></li>
-                  <li><a href="#" onclick="changePage('test_02/index.html');">Test 02</a></li>
-                  <li><a href="#"onclick="changePage('test_03/index.html');">Test 03</a></li>
+                  
+                  <li><a href="#01" onclick="changePage('test_01/index.html');">Moving Boxes</a></li>
+                  <li><a href="#02" onclick="changePage('test_02/index.html');">Sierpinski's Triangle</a></li>
+                  <li><a href="#03" onclick="changePage('test_03/index.html');">Animation along a static path</a></li>
+                  <li><a href="#04" onclick="changePage('test_04/index.html');">Circle Power Dropping</a></li>
+                  <li><a href="#05" onclick="changePage('test_05/index.html');">Move to my Mouse Click</a></li>
+                  <li><a href="#06" onclick="changePage('test_06/index.html');">Simple Low Density Mandelbrot Set...</a></li>   
+
+
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">Nav header</li>
                   <li><a href="#">Separated link</a></li>
@@ -51,13 +57,14 @@
     <div class="container">
       <ul>
         
-        <li><a href="#" onclick="changePage('test_01/index.html');">Test One</a></li>
-        <li><a href="#" onclick="changePage('test_02/index.html');">Test Two</a></li>
-        <li><a href="#" onclick="changePage('test_03/index.html');">Test Three</a></li>
-        <li><a href="#" onclick="changePage('test_04/index.html');">Test Four</a></li>
-                <li><a href="#" onclick="changePage('test_05/index.html');">Test Five</a></li>
+        <li><a href="#01" onclick="changePage('test_01/index.html');">Moving Boxes</a></li>
+        <li><a href="#02" onclick="changePage('test_02/index.html');">Sierpinski's Triangle</a></li>
+        <li><a href="#03" onclick="changePage('test_03/index.html');">Animation along a static path</a></li>
+        <li><a href="#04" onclick="changePage('test_04/index.html');">Circle Power Dropping</a></li>
+        <li><a href="#05" onclick="changePage('test_05/index.html');">Move to my Mouse Click</a></li>
+        <li><a href="#06" onclick="changePage('test_06/index.html');">Simple Low Density Mandelbrot Set...</a></li>                
 
-      <iframe width="640" height="600" id="vid_frame" src="test_01/index.html" frameborder="0" allowfullscreen></iframe>
+      <iframe width="640" height="600" id="vid_frame" src="" frameborder="0" allowfullscreen></iframe>
 
           <script>
     
@@ -71,7 +78,25 @@
     </div>
 
 
- 
+<script>
 
+window.onload = function(){
+
+  if(window.location.hash) { 
+
+    var thehash = window.location.hash;
+    thehash = thehash.replace(/#/g, '');
+
+    console.log(thehash);
+
+    changePage('test_' + thehash + '/index.html');  
+
+  } else {
+    console.log("no hash ?");
+  }
+
+};
+
+</script>
   </body>
 </html>

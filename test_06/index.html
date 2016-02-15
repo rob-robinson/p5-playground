@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rob's P5 Testing Playground...</title>
+</head>
+<body>
+
+  <div id='myContainer'></div>
+
+  <script src="../js/p5/p5.min.js"></script>    
+
+  <script>
+
+  var iterations = 20;
+
+  var app = {
+    canvas: {
+      width:800,
+      height:800
+    },
+    scale : 10
+  };
+  
+  var xlow = -2.5;
+  var dx = 0.005;
+  var ylow = -2.0;
+  var dy = 0.005;
+  
+  function setup() {
+    createCanvas(
+      app.canvas.width,
+      app.canvas.height
+    );
+  }
+  function draw(){
+
+    for(i=0;i<app.canvas.width;i+=app.scale){
+      
+      for(j=0;j<app.canvas.height;j+=app.scale){
+        
+        var x = xlow + i*dx; //Changes the screen format
+        var y = ylow + j*dx; //to the x-y format
+        var loc = [x,y];
+
+        //now run the mandelbrot function
+        var z = [0,0];
+        for(k=0;k<iterations;k++){
+          var z2 = squareZ(z);//square z
+          z2[0] += loc[0];
+          z2[1] += loc[1];
+          z = z2;//update z to new value
+          }
+          //if it converges:
+          if (sqrt(z2[0]*z2[0] + z2[1]*z2[1]) < 2){
+            drawSingleDot(i,j,10);
+          }
+          
+          
+        }
+      }
+      noLoop();
+  }
+
+  function squareZ(z){
+    return [z[0]*z[0]-z[1]*z[1],2*z[0]*z[1]];
+  }
+
+  function drawSingleDot(x,y, size){
+    //fill((20*x)%255,(20*y)%255,20);
+    fill(20,20,20);
+    noStroke();
+    push();
+    translate(x,y);
+    //quad(size/4,0, size/4,-size, -size/4,-size, -size/4,0);
+    text("*",size/4,0)
+    pop();
+    }
+
+
+  </script>
+
+  </body>
+</html>
