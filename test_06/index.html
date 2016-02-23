@@ -15,14 +15,14 @@
     The foundation for this page comes from this page: http://students.learningtech.org/~pfarrell/p5_mandelbrot_logo2.html
   */
 
-  var iterations = 20;
+  var iterations = 30;
 
   var app = {
     canvas: {
       width:800,
       height:800
     },
-    scale : 4
+    scale : 10
   };
   
   var xlow = -2.5;
@@ -32,18 +32,20 @@
   var dy = 0.005;
   
   function setup() {
+    
     createCanvas(
       app.canvas.width,
       app.canvas.height
     );
-    textSize(12);
+
+    textSize(13);
   }
 
   function draw(){
 
-    for(i=0;i<app.canvas.width;i+=app.scale){
+    for( i = 0; i < app.canvas.width; i += app.scale ) {
       
-      for(j=0;j<app.canvas.height;j+=app.scale){
+      for( j = 0; j < app.canvas.height; j += app.scale ) {
         
         var x = xlow + i*dx; //Changes the screen format
         var y = ylow + j*dx; //to the x-y format
@@ -61,7 +63,7 @@
         }
         //if it converges:
         if (sqrt(z2[0]*z2[0] + z2[1]*z2[1]) < 2){
-          drawSingleDot(i,j,12);
+          drawSingleDot(i,j,2);
         }
       }
     }
@@ -79,8 +81,11 @@
     noStroke();
     push();
     translate(x,y);
-    //quad(size/4,0, size/4,-size, -size/4,-size, -size/4,0);
+    
+    //quad(size/app.scale,0, size/app.scale,-size, -size/app.scale,-size, -size/app.scale,0);
+    
     text("*",size/4,0)
+
     pop();
     }
 

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1">
+
   <title>Rob's P5 Testing Playground...</title>
   <link href="./css/bootstrap.css" rel="stylesheet" />
   <script src="./js/jquery.2.2.0.min.js"></script>
@@ -55,6 +57,7 @@
     </div>
 
     <div class="container">
+      
       <ul>
         
         <li><a href="#01" onclick="changePage('test_01/index.html');">Moving Boxes</a></li>
@@ -64,21 +67,18 @@
         <li><a href="#05" onclick="changePage('test_05/index.html');">Move to my Mouse Click</a></li>
         <li><a href="#06" onclick="changePage('test_06/index.html');">Simple Low Density Mandelbrot Set...</a></li>                
 
+      </ul>
+
       <iframe width="640" height="600" id="vid_frame" src="" frameborder="0" allowfullscreen></iframe>
 
-          <script>
-    
-        function changePage(url){
-            document.getElementById('vid_frame').src = url;
-        }
-    
-          </script>
-
-      </ul>
     </div>
 
 
 <script>
+
+function changePage(url){
+    document.getElementById('vid_frame').src = url;
+}
 
 window.onload = function(){
 
@@ -87,16 +87,15 @@ window.onload = function(){
     var thehash = window.location.hash;
     thehash = thehash.replace(/#/g, '');
 
-    console.log(thehash);
-
-    changePage('test_' + thehash + '/index.html');  
+    changePage('test_' + thehash + '/');  
 
   } else {
-    console.log("no hash ?");
+    // console.log("no hash ?");
   }
 
 };
 
 </script>
-  </body>
+
+</body>
 </html>
