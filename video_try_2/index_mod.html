@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rob's P5 Testing Playground...</title>
+  <script src="../js/p5/p5.min.js"></script>
+  <script src="../js/p5/p5.dom.min.js"></script>
+
+</head>
+<body>
+
+
+  <script>
+
+  var video;
+  var vScale = 16;
+
+  function setup() {
+    createCanvas(640,480);
+    // pixelDensity(1);
+    video = createCapture(VIDEO);
+    video.size(640, 480);
+
+    tint(100,20,200);
+  }
+
+  function draw() {
+
+    image(video, 0, 0, width, height);
+  }
+
+
+  </script>
+
+  </body>
+</html>

@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<style type="text/css">
+iframe {
+    max-width: 100%;
+}
+</style>
+
 <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1">
 
   <title>Rob's P5 Testing Playground...</title>
   <link href="./css/bootstrap.css" rel="stylesheet" />
   <script src="./js/jquery.2.2.0.min.js"></script>
   <script src="./js/bootstrap.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -33,13 +41,14 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  
+
                   <li><a href="#01" onclick="changePage('test_01/index.html');">Moving Boxes</a></li>
                   <li><a href="#02" onclick="changePage('test_02/index.html');">Sierpinski's Triangle</a></li>
                   <li><a href="#03" onclick="changePage('test_03/index.html');">Animation along a static path</a></li>
                   <li><a href="#04" onclick="changePage('test_04/index.html');">Circle Power Dropping</a></li>
                   <li><a href="#05" onclick="changePage('test_05/index.html');">Move to my Mouse Click</a></li>
-                  <li><a href="#06" onclick="changePage('test_06/index.html');">Simple Low Density Mandelbrot Set...</a></li>   
+                  <li><a href="#06" onclick="changePage('test_06/index.html');">Simple Low Density Mandelbrot Set...</a></li>
+                  <li><a href="#07" onclick="changePage('video_try/index.html');">Video Fun 1</a></li>
 
 
                   <li role="separator" class="divider"></li>
@@ -57,19 +66,20 @@
     </div>
 
     <div class="container">
-      
+
       <ul>
-        
+
         <li><a href="#01" onclick="changePage('test_01/index.html');">Moving Boxes</a></li>
         <li><a href="#02" onclick="changePage('test_02/index.html');">Sierpinski's Triangle</a></li>
         <li><a href="#03" onclick="changePage('test_03/index.html');">Animation along a static path</a></li>
         <li><a href="#04" onclick="changePage('test_04/index.html');">Circle Power Dropping</a></li>
         <li><a href="#05" onclick="changePage('test_05/index.html');">Move to my Mouse Click</a></li>
-        <li><a href="#06" onclick="changePage('test_06/index.html');">Simple Low Density Mandelbrot Set...</a></li>                
+        <li><a href="#06" onclick="changePage('test_06/index.html');">Simple Low Density Mandelbrot Set...</a></li>
+        <li><a href="#07" onclick="changePage('video_try/index.html');">Video Fun 1</a></li>   
 
       </ul>
 
-      <iframe width="640" height="600" id="vid_frame" src="" frameborder="0" allowfullscreen></iframe>
+      <iframe width="720" height="820" id="vid_frame" src="" frameborder="0" allowfullscreen></iframe>
 
     </div>
 
@@ -82,12 +92,12 @@ function changePage(url){
 
 window.onload = function(){
 
-  if(window.location.hash) { 
+  if(window.location.hash) {
 
     var thehash = window.location.hash;
     thehash = thehash.replace(/#/g, '');
 
-    changePage('test_' + thehash + '/');  
+    changePage('test_' + thehash + '/');
 
   } else {
     // console.log("no hash ?");
