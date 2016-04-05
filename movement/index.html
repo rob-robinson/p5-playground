@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rob's P5 Testing Playground...</title>
+  <script src="../js/p5/p5.min.js"></script>
+  <script src="../js/p5/p5.dom.min.js"></script>
+
+</head>
+<body>
+
+
+  <script>
+
+var bug;  // Declare object
+var dots;
+
+function setup() {
+  createCanvas(710, 400);
+  // Create object
+  bug = new Jitter();
+  dots = [];
+}
+
+function draw() {
+  background(50, 89, 100);
+  bug.move();
+  bug.display();
+
+  for(var i=0; i<dots.length; i+=1){
+    dots[i].display();
+  }
+}
+
+// Jitter class
+function Jitter() {
+  this.x = random(width);
+  this.y = random(height);
+  this.diameter = random(10, 30);
+  this.speed = 1;
+
+  this.move = function() {
+    this.x += random(-this.speed, this.speed);
+    this.y += random(-this.speed, this.speed);
+  };
+
+  this.display = function() {
+    ellipse(this.x, this.y, this.diameter, this.diameter);
+  }
+};
+
+function mouseClicked() {
+  // prevent default
+
+  dots.push({
+    x : mouseX,
+    y : mouseY,
+    w : 5,
+    h : 5,
+    display : function () {
+      fill(255,100,70);
+      ellipse(this.x, this.y, this.w, this.h);
+    }
+  });
+
+  return false;
+}
+
+  </script>
+
+  </body>
+</html>
