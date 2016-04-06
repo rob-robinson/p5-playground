@@ -7,7 +7,7 @@
 
   <div id='myContainer'></div>
 
-  <script src="../js/p5/p5.min.js"></script>    
+  <script src="../js/p5/p5.min.js"></script>
 
   <script>
 
@@ -39,7 +39,7 @@
     distX = endX - beginX;
     distY = endY - beginY;
 
-    
+
   }
 
 
@@ -66,6 +66,17 @@ function mousePressed() {
   endY = mouseY;
   distX = endX - beginX;
   distY = endY - beginY;
+}
+
+function mouseMoved() {
+  pct = 0.0;
+  beginX = x;
+  beginY = y;
+  endX = mouseX;
+  endY = mouseY;
+  distX = endX - beginX;
+  distY = endY - beginY;
+  return false;
 }
 
 
