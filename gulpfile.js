@@ -10,5 +10,5 @@ gulp.task('serve', function() {
     }
   });
 
-  gulp.watch(['*.html', 'styles/**/*.css', 'test*/*.html','vid*/*.html'], {cwd: ''}, reload);
+  gulp.watch(['*.html', 'styles/**/*.css', 't*/*.html','vid*/*.html'], {cwd: ''}, reload);
 });

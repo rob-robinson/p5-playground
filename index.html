@@ -42,20 +42,7 @@ iframe {
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
 
-                  <li><a href="#01" onclick="changePage('test_01/index.html');">Moving Boxes</a></li>
-                  <li><a href="#02" onclick="changePage('test_02/index.html');">Sierpinski's Triangle</a></li>
-                  <li><a href="#03" onclick="changePage('test_03/index.html');">Animation along a static path</a></li>
-                  <li><a href="#04" onclick="changePage('test_04/index.html');">Circle Power Dropping</a></li>
-                  <li><a href="#05" onclick="changePage('test_05/index.html');">Move to my Mouse Click</a></li>
-                  <li><a href="#06" onclick="changePage('test_06/index.html');">Simple Low Density Mandelbrot Set...</a></li>
-                  <li><a href="#07" onclick="changePage('video_try/index.html');">Video Fun 1</a></li>
-                  <li><a href="#08" onclick="changePage('movement/index.html');">Movement</a></li>
-
-                  <li><a href="#09" onclick="changePage('video_try_2/index.html');">Video Try 2</a></li>
-                  <li><a href="#10" onclick="changePage('video_try_3/index.html');">Video Try 3</a></li>
-                  <li><a href="#11" onclick="changePage('video_try_4/index.html');">Video Try 4</a></li>
-                  <li><a href="#12" onclick="changePage('video_try_5/index.html');">Video Try 5</a></li>
-
+                  <li><a t01v');">Moving Boxes</a></li>
 
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">Nav header</li>
@@ -75,22 +62,26 @@ iframe {
 
       <ul>
 
-        <li><a href="#01" onclick="changePage('test_01/index.html');">Moving Boxes</a></li>
-        <li><a href="#02" onclick="changePage('test_02/index.html');">Sierpinski's Triangle</a></li>
-        <li><a href="#03" onclick="changePage('test_03/index.html');">Animation along a static path</a></li>
-        <li><a href="#04" onclick="changePage('test_04/index.html');">Circle Power Dropping</a></li>
-        <li><a href="#05" onclick="changePage('test_05/index.html');">Move to my Mouse Click</a></li>
-        <li><a href="#06" onclick="changePage('test_06/index.html');">Simple Low Density Mandelbrot Set...</a></li>
-        <li><a href="#07" onclick="changePage('video_try/index.html');">Video Fun 1</a></li>
-        <li><a href="#08" onclick="changePage('movement/index.html');">Movement</a></li>
+        <li><a href="./t01">Moving Boxes</a></li>
+        <li><a href="./t02">Sierpinski's Triangle</a></li>
+        <li><a href="./t03">Animation along a static path</a></li>
+        <li><a href="./t04">Circle Power Dropping</a></li>
+        <li><a href="./t05">Move to my Mouse Click</a></li>
+        <li><a href="./t06">Simple Low Density Mandelbrot Set...</a></li>
+        <li><a href="./t07">10 Circles, array, click...</a></li>
 
-        <li><a href="#09" onclick="changePage('video_try_2/index.html');">Video Try 2</a></li>
-        <li><a href="#10" onclick="changePage('video_try_3/index.html');">Video Try 3</a></li>
-        <li><a href="#11" onclick="changePage('video_try_4/index.html');">Video Try 4</a></li>
-        <li><a href="#12" onclick="changePage('video_try_5/index.html');">Video Try 5</a></li>
-        <li><a href="#13" onclick="changePage('video_try_6/index.html');">Video Try 6</a></li>
-        <li><a href="#14" onclick="changePage('video_try_7/index.html');">Video Try 7</a></li>
-        <li><a href="#15" onclick="changePage('video_try_8/index.html');">Video Try 8</a></li>
+        <li><a href="./movement">Movement</a></li>
+
+        <li><a href="./v01">Video Fun 1</a></li>
+        <li><a href="./v02">Video Try 2</a></li>
+        <li><a href="./v03">Video Try 3</a></li>
+        <li><a href="./v04">Video Try 4</a></li>
+        <li><a href="./v05">Video Try 5</a></li>
+        <li><a href="./v06">Video Try 6</a></li>
+        <li><a href="./v07">Video Try 7</a></li>
+        <li><a href="./v08">Video Try 8</a></li>
+        <li><a href="./v09">Video Try 9</a></li>
+        <li><a href="./v10">Video Try 10</a></li>
 
       </ul>
 
@@ -112,7 +103,7 @@ window.onload = function(){
     var thehash = window.location.hash;
     thehash = thehash.replace(/#/g, '');
 
-    changePage('test_' + thehash + '/');
+    changePage('t' + thehash + '/');
 
   } else {
     // console.log("no hash ?");

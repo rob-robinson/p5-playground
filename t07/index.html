@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rob's P5 Testing Playground...</title>
+</head>
+<body>
+
+  <div id='myContainer'></div>
+
+  <script src="../js/p5/p5.min.js"></script>
+
+  <script>
+
+  var app = {
+    canvas : {
+      w : 600,
+      h : 600
+    }
+  };
+
+
+  var dots = [];
+
+  function setup() {
+    var myCanvas = createCanvas(app.canvas.w, app.canvas.h);
+    myCanvas.parent('myContainer');
+
+    //size(640, 360);
+    noStroke();
+
+
+    for(var i=0; i<=10; i+=1){
+      dots.push({
+        exponent : 4,   // Determines the curve
+
+        beginX : Math.random() * (app.canvas.w - 0) + 0,  // Initial x-coordinate
+        beginY : Math.random() * (app.canvas.w - 0) + 0,  // Initial y-coordinate
+        endX : 570.0,   // Final x-coordinate
+        endY : 320.0,   // Final y-coordinate
+        distX : 0,          // X-axis distance to move
+        distY : 0,          // Y-axis distance to move
+
+        x : 0,        // Current x-coordinate
+        y : 0,        // Current y-coordinate
+        step : 0.01,    // Size of each step along the path
+        pct : 0.0,      // Percentage traveled (0.0 to 1.0)
+
+        display : function () {
+
+          this.pct += this.step;
+          if (this.pct < 1.0) {
+            this.x = this.beginX + (this.pct * this.distX);
+            this.y = this.beginY + (this.pct * this.distY);
+          }
+          fill(255);
+          ellipse(this.x, this.y, 20, 20);
+
+          this.distX = this.endX - this.beginX;
+          this.distY = this.endY - this.beginY;
+        }
+      });
+    }
+
+  }
+
+
+
+
+function draw() {
+
+  //fill(0, 2);
+  fill(0);
+  rect(0, 0, app.canvas.w, app.canvas.h);
+
+
+  for(var i=0; i<dots.length; i+=1){
+    dots[i].display();
+  }
+
+}
+
+
+
+function mousePressed() {
+  for(var i=0; i<dots.length; i+=1){
+    dots[i].pct = 0.0;
+    dots[i].beginX = Math.random() * (app.canvas.w - 0) + 0;
+    dots[i].beginY = Math.random() * (app.canvas.w - 0) + 0;
+    dots[i].endX = mouseX;
+    dots[i].endY = mouseY;
+    dots[i].distX = dots[i].endX - dots[i].beginX;
+    dots[i].distY = dots[i].endY - dots[i].beginY;
+  }
+  return false;
+}
+
+function mouseMoved() {
+  // for(var i=0; i<dots.length; i+=1){
+  //   dots[i].pct = 0.0;
+  //   dots[i].beginX = Math.random() * (app.canvas.w - 0) + 0;
+  //   dots[i].beginY = Math.random() * (app.canvas.w - 0) + 0;
+  //   dots[i].endX = mouseX;
+  //   dots[i].endY = mouseY;
+  //   dots[i].distX = dots[i].endX - dots[i].beginX;
+  //   dots[i].distY = dots[i].endY - dots[i].beginY;
+  // }
+  // return false;
+}
+
+
+  </script>
+
+  </body>
+</html>
