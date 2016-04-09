@@ -15,9 +15,6 @@
     canvas : {
       w : 600,
       h : 600
-    },
-    defaults : {
-      dotWidth : 16
     }
   };
 
@@ -36,15 +33,12 @@
       dots.push({
         exponent : 4,   // Determines the curve
 
-        beginX : Math.random() * (app.canvas.w - 0) + 0,  // Initial x-coordinate
-        beginY : Math.random() * (app.canvas.w - 0) + 0,  // Initial y-coordinate
-        endX : 570.0,   // Final x-coordinate
-        endY : 320.0,   // Final y-coordinate
+        beginX : app.canvas.w/2 ,  // Initial x-coordinate
+        beginY : app.canvas.w/2,  // Initial y-coordinate
+        endX : Math.random() * (app.canvas.w - 0) + 0,   // Final x-coordinate
+        endY : Math.random() * (app.canvas.w - 0) + 0,   // Final y-coordinate
         distX : 0,          // X-axis distance to move
         distY : 0,          // Y-axis distance to move
-
-        w : app.defaults.dotWidth,
-        h : app.defaults.dotWidth,
 
         x : 0,        // Current x-coordinate
         y : 0,        // Current y-coordinate
@@ -59,7 +53,7 @@
             this.y = this.beginY + (this.pct * this.distY);
           }
           fill(255);
-          ellipse(this.x, this.y, this.w, this.h);
+          ellipse(this.x, this.y, 20, 20);
 
           this.distX = this.endX - this.beginX;
           this.distY = this.endY - this.beginY;
@@ -90,35 +84,27 @@ function draw() {
 function mousePressed() {
   for(var i=0; i<dots.length; i+=1){
     dots[i].pct = 0.0;
-    dots[i].beginX = Math.random() * (app.canvas.w - 0) + 0;
-    dots[i].beginY = Math.random() * (app.canvas.w - 0) + 0;
-    dots[i].endX = mouseX;
-    dots[i].endY = mouseY;
+    dots[i].beginX = mouseX;
+    dots[i].beginY = mouseY;
+    dots[i].endX = Math.random() * (app.canvas.w - 0) + 0;
+    dots[i].endY = Math.random() * (app.canvas.w - 0) + 0;
     dots[i].distX = dots[i].endX - dots[i].beginX;
     dots[i].distY = dots[i].endY - dots[i].beginY;
-
-    dots[i].w = app.defaults.dotWidth;
-    dots[i].h = app.defaults.dotWidth;
   }
   return false;
 }
 
 function mouseMoved() {
-  for(var i=0; i<dots.length; i+=1){
-    dots[i].pct = 0.0;
-
-    dots[i].beginX = dots[i].x;
-    dots[i].beginY = dots[i].y;
-
-    dots[i].endX = mouseX;
-    dots[i].endY = mouseY;
-
-    dots[i].w = dots[i].w*.99;
-    dots[i].h = dots[i].w*.99;
-    // dots[i].distX = dots[i].endX - dots[i].beginX;
-    // dots[i].distY = dots[i].endY - dots[i].beginY;
-  }
-  return false;
+  // for(var i=0; i<dots.length; i+=1){
+  //   dots[i].pct = 0.0;
+  //   dots[i].beginX = Math.random() * (app.canvas.w - 0) + 0;
+  //   dots[i].beginY = Math.random() * (app.canvas.w - 0) + 0;
+  //   dots[i].endX = mouseX;
+  //   dots[i].endY = mouseY;
+  //   dots[i].distX = dots[i].endX - dots[i].beginX;
+  //   dots[i].distY = dots[i].endY - dots[i].beginY;
+  // }
+  // return false;
 }
 
 

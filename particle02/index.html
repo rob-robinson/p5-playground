@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rob's P5 Testing Playground...</title>
+</head>
+<body>
+
+  <div id='myContainer'></div>
+
+  <script src="../js/p5/p5.min.js"></script>
+  <script src="../js/p5/p5.dom.min.js"></script>
+  <script src="./Particle.js"></script>
+
+  <script>
+
+  var app = {
+    canvas : {
+      w : 640,
+      h : 480
+    },
+    defaults : {
+      dotWidth : 16
+    }
+  };
+
+var video;
+var vScale = 16;
+var particles = [];
+
+  function setup() {
+    createCanvas(app.canvas.w, app.canvas.h);
+    pixelDensity(1);
+    video = createCapture(VIDEO);
+    video.size(width/vScale, height/vScale);
+
+    for(var i=0; i<50; i+=1){
+      particles[i] = new Particle(random(width), random(height));
+    }
+
+
+
+
+  }
+
+function draw() {
+
+  video.loadPixels();
+
+  //background(51);
+
+  for(var i=0; i<particles.length; i+=1){
+    particles[i].update();
+    particles[i].show();
+  }
+
+
+}
+
+
+
+// function mousePressed() {
+//   for(var i=0; i<dots.length; i+=1){
+//     dots[i].pct = 0.0;
+//     dots[i].beginX = Math.random() * (app.canvas.w - 0) + 0;
+//     dots[i].beginY = Math.random() * (app.canvas.w - 0) + 0;
+//     dots[i].endX = mouseX;
+//     dots[i].endY = mouseY;
+//     dots[i].distX = dots[i].endX - dots[i].beginX;
+//     dots[i].distY = dots[i].endY - dots[i].beginY;
+//
+//     dots[i].w = app.defaults.dotWidth;
+//     dots[i].h = app.defaults.dotWidth;
+//   }
+//   return false;
+// }
+//
+// function mouseMoved() {
+//   for(var i=0; i<dots.length; i+=1){
+//     dots[i].pct = 0.0;
+//
+//     dots[i].beginX = dots[i].x;
+//     dots[i].beginY = dots[i].y;
+//
+//     dots[i].endX = mouseX;
+//     dots[i].endY = mouseY;
+//
+//     dots[i].w = dots[i].w*.99;
+//     dots[i].h = dots[i].w*.99;
+//     // dots[i].distX = dots[i].endX - dots[i].beginX;
+//     // dots[i].distY = dots[i].endY - dots[i].beginY;
+//   }
+//   return false;
+// }
+
+
+  </script>
+
+  </body>
+</html>
