@@ -22,6 +22,10 @@
     }
   };
 
+  var game = {
+    score : 0
+  };
+
   var keyIsDown = false;
   var currentKey;
 
@@ -60,6 +64,7 @@
 
   var dots = [];
   var crossBar;
+  var explosion;
 
   var xWings = [];
 
@@ -73,6 +78,7 @@
 
     crossBar = loadImage("./img/crossbar.png");
     xWing = loadImage("./img/xwing.png");
+    explosion = loadImage("./img/explosion.png");
 
     intervalID = window.setInterval(function(){
       xWings.push({
@@ -82,6 +88,8 @@
         endY : random(258-200, 258+200),   // Final y-coordinate
         distX : 0,          // X-axis distance to move
         distY : 0,          // Y-axis distance to move
+
+        hasBeenHit : 0,
 
         w : 1,
         h : 1,
@@ -103,7 +111,13 @@
             this.y = this.beginY + (this.pct * this.distY);
           }
 
-          image(xWing,this.x, this.y, this.w, this.h);
+          if(this.hasBeenHit){
+            //image(crossBar,this.x, this.y, this.w, this.h);
+            image(explosion,this.x, this.y, this.w, this.h);
+          } else {
+            image(xWing,this.x, this.y, this.w, this.h);
+          }
+
 
 
           this.w *= 1.1;
@@ -195,7 +209,8 @@ function addBullet(inX){
 
           if(hit){
             console.log("hit");
-          }else{
+            xWings[i].hasBeenHit = true;
+          } else{
             //fill('green')
           }
         }
@@ -217,25 +232,8 @@ document.body.addEventListener("keyup", function (e) {
 function mousePressed() {
   addBullet(mouseX);
 
-  console.log(mouseX, mouseY);
   return false;
 }
-//
-// function keyPressed() {
-//   //
-//   // keyIsDown = true;
-//   // currentKey = keyCode;
-//   //
-//   // return false;
-// }
-//
-// function keyReleased() {
-//   // keyIsDown = false;
-//   // currentKey = null;
-//
-//   //return false; // prevent any default behavior
-// }
-
 
   </script>
 
