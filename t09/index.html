@@ -21,8 +21,47 @@
     }
   };
 
+  var keyIsDown = false;
+  var currentKey;
+
+  var Player = {
+    x : 600 / 2,
+    y : 590,
+    w : 20,
+    h : 20,
+    moveLeft : function() {
+      this.x -= 5;
+    },
+    moveRight : function() {
+      this.x += 5;
+    },
+    draw : function() {
+      fill(255);
+      rect(this.x, this.y, this.w, this.h);
+
+      if(keyIsDown) {
+
+        if(currentKey == 39 ) {
+          // right
+          Player.moveRight();
+        }
+
+        if(currentKey == 37 ) {
+          // left
+          Player.moveLeft();
+        }
+
+        if( currentKey == 32 ) {
+          addBullet(Player.x);
+        }
+      }
+    }
+  };
 
   var dots = [];
+  var img;
+
+  var xWings = [];
 
   function setup() {
     var myCanvas = createCanvas(app.canvas.w, app.canvas.h);
@@ -31,6 +70,47 @@
     //size(640, 360);
     noStroke();
 
+    img = loadImage("./img/crossbar.png");
+    img2 = loadImage("./img/xwing.png");
+
+    xWings.push({
+      beginX : app.canvas.w/2,  // Initial x-coordinate
+      beginY : 30,  // Initial y-coordinate
+      endX : app.canvas.h/2,   // Final x-coordinate
+      endY : app.canvas.h/2 + 20,   // Final y-coordinate
+      distX : 0,          // X-axis distance to move
+      distY : 0,          // Y-axis distance to move
+
+      w : 1,
+      h : 1,
+
+      x : 0,        // Current x-coordinate
+      y : 0,        // Current y-coordinate
+      step : 0.02,    // Size of each step along the path
+      pct : 0.0,      // Percentage traveled (0.0 to 1.0)
+
+      display : function () {
+
+        this.pct += this.step;
+        if (this.pct < 1.0) {
+          this.x = this.beginX + (this.pct * this.distX);
+          this.y = this.beginY + (this.pct * this.distY);
+        }
+        fill(12,208,2);
+        //ellipse(this.x, this.y, this.w, this.h);
+        //rect(this.x, this.y, this.w, this.h);
+
+        image(img2,this.x, this.y, this.w, this.h);
+
+        this.distX = this.endX - this.beginX;
+        this.distY = this.endY - this.beginY;
+        this.w *= 1.05;
+        this.h *= 1.05;
+
+      }
+    });
+
+
   }
 
 
@@ -38,11 +118,12 @@
 
 function draw() {
 
-  //fill(0, 2);
+  // clear screen:
   fill(0);
   rect(0, 0, app.canvas.w, app.canvas.h);
 
 
+  // draw each bullet...
   for(var i=0; i<dots.length; i+=1){
     dots[i].display();
 
@@ -52,16 +133,27 @@ function draw() {
     }
   }
 
+  for(var i=0; i<xWings.length; i+=1){
+    xWings[i].display();
+
+    if(xWings[i].w > app.canvas.w){
+      xWings.splice(i,1);
+    }
+  }
+
+  // draw player
+  Player.draw();
+
+  // draw aim rack...
+  image(img, app.canvas.w/2 - img.width/8, app.canvas.h/2 - img.height/8 + 20, img.width/4, img.height/4);
+
+
 }
 
-function mouseReleased() {
-
-}
-
-function mousePressed() {
+function addBullet(inX){
   dots.push({
 
-    beginX : mouseX,  // Initial x-coordinate
+    beginX : inX,  // Initial x-coordinate
     beginY : app.canvas.h - 30,  // Initial y-coordinate
     endX : app.canvas.h/2,   // Final x-coordinate
     endY : app.canvas.h/2 + 20,   // Final y-coordinate
@@ -83,8 +175,9 @@ function mousePressed() {
         this.x = this.beginX + (this.pct * this.distX);
         this.y = this.beginY + (this.pct * this.distY);
       }
-      fill(255);
-      ellipse(this.x, this.y, this.w, this.h);
+      fill(12,208,2);
+      //ellipse(this.x, this.y, this.w, this.h);
+      rect(this.x, this.y, this.w, this.h);
 
       this.distX = this.endX - this.beginX;
       this.distY = this.endY - this.beginY;
@@ -93,25 +186,26 @@ function mousePressed() {
 
     }
   });
+}
+
+function mousePressed() {
+  addBullet(mouseX);
   return false;
 }
 
-function mouseMoved() {
-  // for(var i=0; i<dots.length; i+=1){
-  //   dots[i].pct = 0.0;
-  //
-  //   dots[i].beginX = dots[i].x;
-  //   dots[i].beginY = dots[i].y;
-  //
-  //   dots[i].endX = mouseX;
-  //   dots[i].endY = mouseY;
-  //
-  //   dots[i].w = dots[i].w*.99;
-  //   dots[i].h = dots[i].w*.99;
-  //   // dots[i].distX = dots[i].endX - dots[i].beginX;
-  //   // dots[i].distY = dots[i].endY - dots[i].beginY;
-  // }
+function keyPressed() {
+
+  keyIsDown = true;
+  currentKey = keyCode;
+
   return false;
+}
+
+function keyReleased() {
+  keyIsDown = false;
+  currentKey = null;
+
+  return false; // prevent any default behavior
 }
 
 
