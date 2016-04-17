@@ -32,6 +32,22 @@
     passed_fighters : 0
   };
 
+
+  var canonballs = [];
+  var crossBar;
+  var explosion;
+
+  var delay = 5;
+
+  var debugLine = false;
+
+  var delay_count = 0;
+
+  var para_squirrels = [];
+
+  var intervalID;
+
+
   var keyIsDown = false;
   var currentKey;
 
@@ -48,19 +64,19 @@
 
 
 
-      if(this.x > 0){
+      if(this.x > 50){
         this.x -= 10;
       } else {
-        this.x = 0;
+        this.x = 50;
       }
 
     },
     moveRight : function() {
       // this.x += 10;
-      if(this.x < app.canvas.w){
+      if(this.x < app.canvas.w-50){
         this.x += 10;
       } else {
-        this.x = app.canvas.w;
+        this.x = app.canvas.w-50;
       }
 
 
@@ -72,24 +88,6 @@
       //rect(this.x, this.y, this.w, this.h);
 
       image(canon,this.x, this.y, this.w, this.h);
-
-      if(keys[38]){
-        // crossUp -= 10;
-        // crossX = 300 - Math.sin(this.rotation * (Math.PI/180)) * 350;
-        // crossY = crossUp - Math.cos(this.rotation * (Math.PI/180)) * 50;
-        //
-        // game.draw_cross_bar();
-      }
-      if(keys[40]){
-        // crossUp += 10;
-        //
-        // crossX = 300 - Math.sin(this.rotation * (Math.PI/180)) * 350;
-        // crossY = crossUp - Math.cos(this.rotation * (Math.PI/180)) * 50;
-        //
-        // game.draw_cross_bar();
-      }
-
-
 
       if(keys[39] ) {
         // right
@@ -119,20 +117,6 @@
     }
   };
 
-  var canonballs = [];
-  var crossBar;
-  var explosion;
-
-  var delay = 5;
-
-  var debugLine = false;
-
-  var delay_count = 0;
-
-  var para_squirrels = [];
-
-  var intervalID;
-
 
   function setup() {
     var myCanvas = createCanvas(app.canvas.w, app.canvas.h);
@@ -148,15 +132,15 @@
 
     intervalID = window.setInterval(function(){
 
-      var xValue = random(20, 600);
+      var xValue = random(100, 500);
 
       para_squirrels.push({
         beginX : xValue,  // Initial x-coordinate
         beginY : 10,  // Initial y-coordinate
         endX : xValue,   // Final x-coordinate
         endY : app.canvas.h + 20,   // Final y-coordinate
-        distX : 0,          // X-axis distance to move
-        distY : 0,          // Y-axis distance to move
+        // distX : 0,          // X-axis distance to move
+        // distY : 0,          // Y-axis distance to move
 
         hasBeenHit : 0,
 
@@ -188,6 +172,7 @@
 
           if(this.y > app.canvas.h/3){
             image(para_squirrel_01,this.x, this.y, this.w, this.h);
+            this.step = 0.005
           } else {
             image(para_squirrel,this.x, this.y, this.w, this.h);
           }
@@ -198,7 +183,7 @@
 
     //addBullet(Player.x);
 
-  }, 1000);
+  }, 750);
   }
 
 function draw() {
@@ -217,8 +202,6 @@ function draw() {
     if(canonballs[i].y < 20){
       canonballs.splice(i,1);
     }
-
-
   }
 
   for(var i=0; i<para_squirrels.length; i+=1){
@@ -231,14 +214,10 @@ function draw() {
     } else {
       //document.getElementById('passed_fighters').innerHTML = para_squirrels[i].x;
     }
-
-
   }
 
   // draw player
   Player.draw();
-
-
 }
 
 function addBullet(inX){
@@ -249,17 +228,17 @@ function addBullet(inX){
   canonballs.push({
 
     beginX : xValue,  // Initial x-coordinate
-    beginY : 520,  // Initial y-coordinate
+    beginY : 500,  // Initial y-coordinate
     endX : xValue,   // Final x-coordinate
     endY : 0,   // Final y-coordinate
-    distX : this.endX - this.beginX,          // X-axis distance to move
-    distY : this.endY - this.beginY,          // Y-axis distance to move
+    distX : 0,          // X-axis distance to move
+    distY : 0,          // Y-axis distance to move
 
     w : 36,
     h : 36,
 
-    // x : xValue,
-    // y : yValue,
+    x : 300,
+    y : 550,
 
     // x : Player.x + Player.w/2,        // Current x-coordinate
     // y : 10,        // Current y-coordinate
@@ -268,13 +247,16 @@ function addBullet(inX){
 
     display : function () {
 
+      this.x = Number(this.x);
+      this.y = Number(this.y);
+
       this.pct += this.step;
       if (this.pct < 1.0) {
         this.x = this.beginX + (this.pct * this.distX);
         this.y = this.beginY + (this.pct * this.distY);
       }
 
-      image(canonball,this.x, this.y,36,36);
+
 
       this.distX = this.endX - this.beginX;
       this.distY = this.endY - this.beginY;
@@ -300,6 +282,7 @@ function addBullet(inX){
       }
 
 
+      image(canonball,this.x, this.y,36,36);
 
     }
   });
@@ -311,14 +294,14 @@ function addBullet(inX){
 // key events
 document.body.addEventListener("keydown", function (e) {
   // console.log(e.keyCode);
-    e.preventDefault()
+    //e.preventDefault()
     keys[e.keyCode] = true;
-    //return false;
+    return false;
 });
 document.body.addEventListener("keyup", function (e) {
     // e.preventDefault()
     keys[e.keyCode] = false;
-    //return false;
+    return false;
 });
 
   </script>
