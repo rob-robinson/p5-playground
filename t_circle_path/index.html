@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rob's P5 Testing Playground...</title>
+</head>
+<body>
+
+  <div id='myContainer'></div>
+
+  <script src="../js/p5/p5.min.js"></script>
+
+  <script>
+
+  var app = {
+    canvas : {
+      w : 600,
+      h : 600
+    },
+    defaults : {
+      dotWidth : 16
+    }
+  };
+
+
+  var Player = {
+    beginX : 0,  // Initial x-coordinate
+    beginY : 22,  // Initial y-coordinate
+    endX : 300 - Math.sin(75 * (Math.PI/180)) * 350,   // Final x-coordinate
+    endY : 500 - Math.cos(75 * (Math.PI/180)) * 250,   // Final y-coordinate
+    distX : this.endX - this.beginX,          // X-axis distance to move
+    distY : this.endY - this.beginY,          // Y-axis distance to move
+
+    w : app.defaults.dotWidth,
+    h : app.defaults.dotWidth,
+
+    x : 0,        // Current x-coordinate
+    y : 0,        // Current y-coordinate
+    step : 0.02,    // Size of each step along the path
+    pct : 0.0,      // Percentage traveled (0.0 to 1.0)
+
+    draw : function () {
+
+      console.log(
+
+        "endX: " + floor(this.endX,2),
+        "endY: " + floor(this.endY,2),
+        "sin: " + Math.sin(75 * (Math.PI/180)),
+        "cos: " + Math.cos(75 * (Math.PI/180))
+      );
+
+      this.pct += this.step;
+      if (this.pct < 1.0) {
+        this.x = this.beginX + (this.pct * this.distX);
+        this.y = this.beginY + (this.pct * this.distY);
+      }
+      fill(12,208,2);
+      //ellipse(this.x, this.y, this.w, this.h);
+      rect(this.x, this.y, this.w, this.h);
+
+      this.distX = this.endX - this.beginX;
+      this.distY = this.endY - this.beginY;
+      this.w *= .95;
+      this.h *= .95;
+
+
+
+    }
+  };
+
+  function setup() {
+    var myCanvas = createCanvas(app.canvas.w, app.canvas.h);
+    myCanvas.parent('myContainer');
+
+
+  }
+
+function draw() {
+
+  // clear screen:
+  fill(0);
+  rect(0, 0, app.canvas.w, app.canvas.h);
+
+
+  // draw player
+  Player.draw();
+
+}
+
+
+  </script>
+
+  </body>
+</html>
