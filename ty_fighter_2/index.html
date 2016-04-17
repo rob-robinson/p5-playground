@@ -42,11 +42,12 @@
     y : 590,
     w : 20,
     h : 20,
+    rotation : 0,
     moveLeft : function() {
-      this.x -= 10;
+      this.rotation -= 10;
     },
     moveRight : function() {
-      this.x += 10;
+      this.rotation += 10;
     },
     draw : function() {
       fill(255);
@@ -87,6 +88,9 @@
     explosion = loadImage("./img/explosion.png");
 
     intervalID = window.setInterval(function(){
+
+      addBullet(Player.x);
+
       xWings.push({
         beginX : 292,  // Initial x-coordinate
         beginY : 283,  // Initial y-coordinate
@@ -176,34 +180,25 @@ function draw() {
 function addBullet(inX){
   dots.push({
 
-    beginX : inX,  // Initial x-coordinate
-    beginY : app.canvas.h - 30,  // Initial y-coordinate
-    endX : app.canvas.h/2,   // Final x-coordinate
-    endY : app.canvas.h/2 + 20,   // Final y-coordinate
-    distX : 0,          // X-axis distance to move
-    distY : 0,          // Y-axis distance to move
+    dx : 200 *  ,
+    dy : 1,
 
     w : app.defaults.dotWidth,
     h : app.defaults.dotWidth,
 
-    x : 0,        // Current x-coordinate
-    y : 0,        // Current y-coordinate
+    x : Player.x,        // Current x-coordinate
+    y : app.canvas.h - 30,        // Current y-coordinate
     step : 0.02,    // Size of each step along the path
     pct : 0.0,      // Percentage traveled (0.0 to 1.0)
 
     display : function () {
+      console.log(Player.rotation);
+      this.x += this.dx;
+      this.y += this.dy;
 
-      this.pct += this.step;
-      if (this.pct < 1.0) {
-        this.x = this.beginX + (this.pct * this.distX);
-        this.y = this.beginY + (this.pct * this.distY);
-      }
       fill(12,208,2);
       ellipse(this.x, this.y, this.w, this.h);
-      // rect(this.x, this.y, this.w, this.h);
 
-      this.distX = this.endX - this.beginX;
-      this.distY = this.endY - this.beginY;
       this.w *= .95;
       this.h *= .95;
 

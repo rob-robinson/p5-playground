@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rob's P5 Testing Playground...</title>
+</head>
+<body>
+
+  <div id='myContainer'></div>
+
+  <script src="../js/p5/p5.min.js"></script>
+  <script src="../js/p5/addons/p5.collision.js"></script>
+
+  <script>
+
+  var app = {
+    canvas : {
+      w : 600,
+      h : 600
+    },
+    defaults : {
+      dotWidth : 16
+    }
+  };
+
+  var game = {
+    score : 0
+  };
+
+  var keyIsDown = false;
+  var currentKey;
+
+  var keys = [];
+
+var stickGuy01,stickGuy02,stickGuy03,stickGuy04;
+
+
+
+var DSG = {
+
+  beginX : null,  // Initial x-coordinate
+  beginY : null,  // Initial y-coordinate
+  endX : null,   // Final x-coordinate
+  endY : null,   // Final y-coordinate
+
+  x : this.beginX,        // Current x-coordinate
+  y : this.beginY,        // Current y-coordinate
+
+  step : 0.05,    // Size of each step along the path
+  pct : 0.0,      // Percentage traveled (0.0 to 1.0)
+
+  images : [],
+  intervalID : null,
+
+  setup : function() {
+
+    this.beginX = Math.floor((Math.random() * 400) + 1);  // Initial x-coordinate
+    this.beginY = Math.floor((Math.random() * 400) + 1);  // Initial y-coordinate
+    this.endX = Math.floor((Math.random() * 400) + 1);   // Final x-coordinate
+    this.endY = Math.floor((Math.random() * 400) + 1);   // Final y-coordinate
+
+    this.images = [
+      stickGuy01,
+      stickGuy02,
+      stickGuy03,
+      stickGuy04
+    ];
+
+    window.setInterval(function(){
+
+      DSG.beginX = Math.floor((Math.random() * 400) + 1);  // Initial x-coordinate
+      DSG.beginY = Math.floor((Math.random() * 400) + 1);  // Initial y-coordinate
+      DSG.endX = Math.floor((Math.random() * 400) + 1);   // Final x-coordinate
+      DSG.endY = Math.floor((Math.random() * 400) + 1);   // Final y-coordinate
+      DSG.pct = 0.0;
+
+    }, 2000);
+  },
+  display : function() {
+
+    this.pct += this.step;
+
+    this.distX = this.endX - this.beginX;
+    this.distY = this.endY - this.beginY;
+
+    if (this.pct < 1.0) {
+      this.x = this.beginX + (this.pct * this.distX);
+      this.y = this.beginY + (this.pct * this.distY);
+    }
+
+    image(this.images[imageState],this.x, this.y, this.w, this.h);
+  }
+};
+
+  var imageState = 0;
+
+  var intervalID;
+
+  function setup() {
+
+    stickGuy01 = loadImage("../img/drumstickguys/stuck-drum-set-guy-01.png");
+    stickGuy02 = loadImage("../img/drumstickguys/stuck-drum-set-guy-02.png");
+    stickGuy03 = loadImage("../img/drumstickguys/stuck-drum-set-guy-03.png");
+    stickGuy04 = loadImage("../img/drumstickguys/stuck-drum-set-guy-04.png");
+
+    var myCanvas = createCanvas(app.canvas.w, app.canvas.h);
+    myCanvas.parent('myContainer');
+
+    DSG.setup();
+
+
+
+  }
+
+
+
+
+function draw() {
+
+  // clear screen:
+  fill(255);
+  rect(0, 0, app.canvas.w, app.canvas.h);
+
+  if(keys[65] ) {
+    this.imageState = 1;
+  }
+
+  if(keys[68] ) {
+    this.imageState = 2;
+  }
+
+  if(keys[70] ) {
+    this.imageState = 3;
+  }
+
+  if(keys[83] ) {
+    this.imageState = 0;
+  }
+
+  DSG.display();
+
+}
+
+
+// key events
+document.body.addEventListener("keydown", function (e) {
+    keys[e.keyCode] = true;
+});
+document.body.addEventListener("keyup", function (e) {
+    keys[e.keyCode] = false;
+});
+
+
+  </script>
+
+  </body>
+</html>

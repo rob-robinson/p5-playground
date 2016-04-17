@@ -42,13 +42,28 @@
     y : 590,
     w : 20,
     h : 20,
+    rotation : 0,
     moveLeft : function() {
-      this.x -= 10;
+      // this.x -= 10;
+      if(this.rotation < 90){
+        this.rotation += 2;
+      } else {
+        this.rotation = 90;
+      }
+
     },
     moveRight : function() {
-      this.x += 10;
+      // this.x += 10;
+
+
+      if(this.rotation > -90){
+        this.rotation -= 2;
+      } else {
+        this.rotation = -90;
+      }
     },
     draw : function() {
+
       fill(255);
       rect(this.x, this.y, this.w, this.h);
 
@@ -63,14 +78,32 @@
       }
 
       if(keys[32] ) {
-        addBullet(Player.x);
+
+        if(delay_count == 0){
+          addBullet(Player.x);
+        }
+
       }
+
+      if(delay_count == delay){
+        delay_count = 0;
+      } else {
+        delay_count += 1;
+      }
+
+
     }
   };
 
   var dots = [];
   var crossBar;
   var explosion;
+
+  var delay = 10;
+
+  var debugLine = false;
+
+  var delay_count = 0;
 
   var xWings = [];
 
@@ -124,18 +157,15 @@
             image(xWing,this.x, this.y, this.w, this.h);
           }
 
-
-
           this.w *= 1.01;
           this.h *= 1.01;
-
         }
       });
-    }, 1000);
+
+    //addBullet(Player.x);
+
+  }, 500);
   }
-
-
-
 
 function draw() {
 
@@ -162,6 +192,11 @@ function draw() {
       game.passed_fighters += 1;
       document.getElementById('passed_fighters').innerHTML = game.passed_fighters;
     }
+
+    if(xWings[i].w > app.canvas.w/3 && xWings[i].hasBeenHit){
+      xWings.splice(i,1);
+    }
+
   }
 
   // draw player
@@ -170,18 +205,17 @@ function draw() {
   // draw aim rack...
   image(crossBar, app.canvas.w/2 - crossBar.width/8, app.canvas.h/2 - crossBar.height/8 + 20, crossBar.width/4, crossBar.height/4);
 
-
 }
 
 function addBullet(inX){
   dots.push({
 
     beginX : inX,  // Initial x-coordinate
-    beginY : app.canvas.h - 30,  // Initial y-coordinate
-    endX : app.canvas.h/2,   // Final x-coordinate
-    endY : app.canvas.h/2 + 20,   // Final y-coordinate
-    distX : 0,          // X-axis distance to move
-    distY : 0,          // Y-axis distance to move
+    beginY : Player.y,  // Initial y-coordinate
+    endX : 300 - Math.sin(Player.rotation * (Math.PI/180)) * 300,   // Final x-coordinate
+    endY : 550 - Math.cos(Player.rotation * (Math.PI/180)) * 500,   // Final y-coordinate
+    distX : this.endX - this.beginX,          // X-axis distance to move
+    distY : this.endY - this.beginY,          // Y-axis distance to move
 
     w : app.defaults.dotWidth,
     h : app.defaults.dotWidth,
@@ -193,6 +227,19 @@ function addBullet(inX){
 
     display : function () {
 
+
+      if(debugLine){
+        stroke(250);
+        line(this.beginX, this.beginY, this.endX, this.endY);
+      }
+      console.log(
+        "Rotation: " + Player.rotation,
+        "endX: " + floor(this.endX,2),
+        "endY: " + floor(this.endY,2),
+        "sin: " + Math.sin(Player.rotation * (Math.PI/180)),
+        "cos: " + Math.cos(Player.rotation * (Math.PI/180))
+      );
+
       this.pct += this.step;
       if (this.pct < 1.0) {
         this.x = this.beginX + (this.pct * this.distX);
@@ -200,7 +247,6 @@ function addBullet(inX){
       }
       fill(12,208,2);
       ellipse(this.x, this.y, this.w, this.h);
-      // rect(this.x, this.y, this.w, this.h);
 
       this.distX = this.endX - this.beginX;
       this.distY = this.endY - this.beginY;
@@ -215,13 +261,13 @@ function addBullet(inX){
 
           hit = collidePointRect(this.x, this.y,xWings[i].x,xWings[i].y,40,40); //see if the mouse is in the rect
 
-          if(hit && !xWings[i].hasBeenHit){
-            console.log("hit",this.x, this.y,xWings[i].x, xWings[i].y, xWings[i].w, xWings[i].h);
+          if(hit && !xWings[i].hasBeenHit && xWings[i].w > 25){
+            // console.log("hit",this.x, this.y,xWings[i].x, xWings[i].y, xWings[i].w, xWings[i].h);
             xWings[i].hasBeenHit = true;
             game.score += 1;
             document.getElementById('score').innerHTML = game.score;
           } else{
-            //fill('green')
+
           }
         }
 
@@ -230,6 +276,9 @@ function addBullet(inX){
     }
   });
 }
+
+
+
 
 // key events
 document.body.addEventListener("keydown", function (e) {
