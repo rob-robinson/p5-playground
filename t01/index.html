@@ -12,24 +12,19 @@
   <script>
 
   var app = {
-    canvas : {
-      w : 600,
-      h : 400
-    }
+    canvas : {w : 600,h : 400},
+    friction : 0.9
   };
 
-  var singleBox = {
-    x:5,
-    y:5,
-    w:50,
-    h:50
-  };
+  var singleBox = {x:5,y:5,w:50,h:50};
 
-  var min = 2;
-  var max = 5;
+  var min_rand_velocity = 2;
+  var max_rand_velocity = 5;
 
-  var dy = Math.floor(Math.random() * (max - min + 1)) + min;
-  var dx = Math.floor(Math.random() * (max - min + 1)) + min;
+  var dy = Math.floor(Math.random() * (max_rand_velocity - min_rand_velocity + 1)) + min_rand_velocity;
+  var dx = Math.floor(Math.random() * (max_rand_velocity - min_rand_velocity + 1)) + min_rand_velocity;
+
+
 
   function setup() {
     var myCanvas = createCanvas(app.canvas.w, app.canvas.h);
@@ -37,33 +32,36 @@
   }
 
   function draw() {
+
+    // draw background : clear screen
     background(app.canvas.w, app.canvas.h);
 
+    // set color
     fill(200,0,0);
 
-    rect(singleBox.x,singleBox.y,singleBox.w,singleBox.h)
+    // draw box
+    rect(singleBox.x,singleBox.y,singleBox.w,singleBox.h);
 
-    // now modify the control variables...:
+    // set velocity
     singleBox.x += dx;
     singleBox.y += dy;
 
-    if(singleBox.x > app.canvas.w-singleBox.w){
-      //singleBox.x = 0;
+    // add friction
+    // dx *= app.friction;
+    // dy *= app.friction;
+
+    // do boundry checking and negate velocity
+    if(singleBox.x > app.canvas.w-singleBox.w) {
       dx*=-1;
     } else if(singleBox.x < 0){
-      //singleBox.x = app.canvas.w;
       dx*=-1;
     }
-    if(singleBox.y > app.canvas.h-singleBox.h){
-      //singleBox.y = 0;
+    if(singleBox.y > app.canvas.h-singleBox.h) {
       dy*=-1;
-    } else if(singleBox.y < 0){
-      //singleBox.y = app.canvas.h;
+    } else if(singleBox.y < 0) {
       dy*=-1;
     }
-
   }
-
 
   </script>
 
