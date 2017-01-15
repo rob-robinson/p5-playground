@@ -12,25 +12,19 @@
   <script>
 
   var index = 0;
-  var coordinates = [
 
-  {x:10,y:10},{x:12,y:10},{x:14,y:10},{x:16,y:10},{x:18,y:10},{x:20,y:10}
+  var coordinates = [];
 
-  ];
+  // add the coordinates...
+  for(var i=10; i<500; i+=2){
+    coordinates.push({x:i,y:10+(i/4)});
+  }
 
   var app = {
-    canvas : {
-      w : 600,
-      h : 600
-    }
+    canvas : {w : 600,h : 600}
   };
 
-  var singleBox = {
-    x:5,
-    y:5,
-    w:100,
-    h:100
-  };
+  var singleBox = {x:5,y:5,w:100,h:100};
 
   function setup() {
 
